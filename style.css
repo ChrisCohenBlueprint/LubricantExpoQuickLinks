@@ -152,10 +152,18 @@ body {
 
 /* Icon Styles */
 .link-logo {
-    max-width: 100px;
-    max-height: 30px;
-    margin-right: 1.5rem;
+    max-width: 80px;
+    max-height: 28px;
+    margin-right: 1.25rem;
     object-fit: contain;
+}
+
+/* Ensure square icons like LinkedIn look balanced */
+.link-logo[src*="flaticon"],
+.link-logo[src*="linkedin"] {
+    max-width: 24px;
+    filter: brightness(0) invert(1);
+    /* Make it white to match theme */
 }
 
 img:not([src]),
