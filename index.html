@@ -1,29 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lubricant Expo | All Our Links</title>
+    <title>Connect | Lubricant Expo</title>
+    <meta name="description" content="All our links in one place. Connected and tracked.">
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Outfit:wght@600;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Outfit:wght@400;600;800&display=swap"
+        rel="stylesheet">
 </head>
+
 <body>
     <div class="background-blobs">
         <div class="blob blob-1"></div>
         <div class="blob blob-2"></div>
     </div>
+
     <main class="app-container">
         <header class="hero-section">
-            <img src="logo-icon.png" class="hero-logo" alt="Logo">
+            <!-- Adapting the premium logo style -->
+            <div class="logo-wrapper glass">
+                <img src="../logo-icon.png" class="hero-logo" alt="Logo">
+            </div>
             <h1 class="logo-text">Lubricant<span> Expo</span></h1>
             <p class="subtitle">All Our Links In One Place</p>
         </header>
+
         <section class="links-container" id="links-list">
-            <div class="spinner"></div>
+            <!-- Dynamically populated by script.js -->
+            <div class="loading-spinner">
+                <div class="spinner"></div>
+                <p>Loading connections...</p>
+            </div>
         </section>
+
+        <footer class="legal-footer">
+            <p>&copy; 2026 Lubricant Expo. All rights reserved.</p>
+        </footer>
     </main>
+
     <script src="script.js"></script>
 </body>
+
 </html>
