@@ -3,53 +3,48 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Lubricant Expo | Connections</title>
-    <meta name="description" content="All our links in one place. Professional, connected, and tracked.">
-
-    <!-- Using local style.css for max performance and design control -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connect | Lubricant Expo</title>
+    <meta name="description" content="All our links in one place. Connected and tracked.">
     <link rel="stylesheet" href="style.css">
-
-    <!-- Meta for Theme and Aesthetics -->
-    <meta name="theme-color" content="#020408">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Outfit:wght@400;600;800&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
-    <!-- 4-Layer Neural Background for Depth -->
+    <!-- Premium Neural Background -->
     <div class="background-blobs">
         <div class="blob blob-1"></div>
         <div class="blob blob-2"></div>
         <div class="blob blob-3"></div>
+        <div class="blob blob-4"></div>
     </div>
 
-    <!-- Main Content Container -->
     <main class="app-container">
-        <!-- Premium Branding Header -->
         <header class="hero-section">
             <div class="logo-wrapper">
-                <!-- Fallback to local logo-icon.png -->
-                <img src="logo-icon.png" class="hero-logo" alt="Lubricant Expo" onerror="this.src='../logo-icon.png'">
+                <img src="logo-icon.png" class="hero-logo" alt="Logo" onerror="this.src='../logo-icon.png'">
             </div>
             <h1 class="logo-text">Lubricant<span> Expo</span></h1>
             <p class="subtitle">Global Asset Sharing Network</p>
         </header>
 
-        <!-- Dynamic Link Container (Vertical Stack) -->
-        <div class="links-container" id="links-list">
-            <!-- Loading State before JS kicks in -->
+        <section class="links-container" id="links-list">
+            <!-- Dynamically populated by script.js -->
             <div class="loading-spinner">
                 <div class="spinner"></div>
-                <p class="subtitle" style="font-size: 0.65rem; opacity: 0.5;">Establishing Secure Connection...</p>
+                <p>Loading connections...</p>
             </div>
-        </div>
+        </section>
 
-        <!-- Professional Legal Footer -->
-        <footer>
-            <p>&copy; 2026 LUBRICANT EXPO. ALL OUR LINKS IN ONE PLACE.</p>
+        <footer class="legal-footer">
+            <p>&copy; 2026 Lubricant Expo. All our links in one place.</p>
         </footer>
     </main>
 
-    <!-- Core App Logic -->
     <script src="script.js"></script>
 </body>
 
