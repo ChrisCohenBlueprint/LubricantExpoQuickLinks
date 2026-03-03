@@ -30,7 +30,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 const img = document.createElement('img');
                 img.src = link.icon;
                 img.className = 'link-logo';
-                img.onerror = () => img.remove();
+                // Try to find it in the same folder if assets/ path fails
+                img.onerror = () => {
+                    const originalSrc = img.src;
+                    if (originalSrc.includes('assets/')) {
+                        img.src = originalSrc.split('assets/')[1];
+                    } else {
+                        img.remove();
+                    }
+                };
                 a.appendChild(img);
             }
 
@@ -39,16 +47,16 @@ document.addEventListener('DOMContentLoaded', () => {
             a.appendChild(span);
             linksList.appendChild(a);
 
-            // Staggered Entrance Animation
             setTimeout(() => a.classList.add('visible'), 100 * index);
         });
     }
 
     function renderFallbackLinks() {
+        // Updated paths to check both the root and assets/ folder based on your GitHub screenshot
         const fallback = [
-            { title: 'Lubricant Expo North America', url: 'https://lubricantexpo.com/na/', icon: 'assets/logo-na.png' },
-            { title: 'Lubricant Expo Europe', url: 'https://lubricantexpo.com/eu/', icon: 'assets/logo-eu.png' },
-            { title: 'Lubricant Expo Middle East', url: 'https://lubricantexpo.com/me/', icon: 'assets/logo-me.png' },
+            { title: 'Lubricant Expo North America', url: 'https://lubricantexpo.com/na/', icon: 'logo-na.png' },
+            { title: 'Lubricant Expo Europe', url: 'https://lubricantexpo.com/eu/', icon: 'logo-eu.png' },
+            { title: 'Lubricant Expo Middle East', url: 'https://lubricantexpo.com/me/', icon: 'logo-me.png' },
             { title: 'LinkedIn: Lubricant Expo North America', url: 'https://www.linkedin.com/company/lubricant-expo-north-america', icon: 'https://cdn-icons-png.flaticon.com/512/174/174857.png' },
             { title: 'LinkedIn: Lubricant Expo Middle East', url: 'https://www.linkedin.com/company/lubricant-expo-middle-east', icon: 'https://cdn-icons-png.flaticon.com/512/174/174857.png' },
             { title: 'LinkedIn: Lubricant Expo Europe', url: 'https://www.linkedin.com/company/lubricant-expo-europe', icon: 'https://cdn-icons-png.flaticon.com/512/174/174857.png' }
@@ -65,7 +73,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 const img = document.createElement('img');
                 img.src = link.icon;
                 img.className = 'link-logo';
-                img.onerror = () => img.remove();
+                img.onerror = () => {
+                    // If it can't find it in root, try checking the assets folder
+                    if (!img.src.includes('assets/')) {
+                        img.src = 'assets/' + link.icon;
+                    } else {
+                        img.remove();
+                    }
+                };
                 a.appendChild(img);
             }
 
@@ -74,7 +89,6 @@ document.addEventListener('DOMContentLoaded', () => {
             a.appendChild(span);
             linksList.appendChild(a);
 
-            // Staggered Entrance Animation
             setTimeout(() => a.classList.add('visible'), 100 * index);
         });
     }
