@@ -1,23 +1,20 @@
 document.addEventListener('DOMContentLoaded', () => {
     const linksList = document.getElementById('links-list');
-
-    // In a real scenario, this would be the actual API URL on Render
     const API_BASE = '/api';
 
     async function fetchLinks() {
         try {
             const response = await fetch(`${API_BASE}/links`);
+            if (!response.ok) throw new Error('Network response was not ok');
             const links = await response.json();
 
-            if (links.length === 0) {
-                linksList.innerHTML = '<p class="subtitle" style="text-align:center">No links found.</p>';
-                return;
+            if (!links || links.length === 0) {
+                renderFallbackLinks();
+            } else {
+                renderLinks(links);
             }
-
-            renderLinks(links);
         } catch (error) {
-            console.error('Error fetching links:', error);
-            // Fallback for demonstration if API isn't live yet
+            console.warn('API unavailable, showing fallback links.');
             renderFallbackLinks();
         }
     }
@@ -33,13 +30,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 const img = document.createElement('img');
                 img.src = link.icon;
                 img.className = 'link-logo';
+                img.onerror = () => img.remove();
                 a.appendChild(img);
             }
 
             const span = document.createElement('span');
             span.textContent = link.title;
             a.appendChild(span);
-
             linksList.appendChild(a);
         });
     }
@@ -49,9 +46,9 @@ document.addEventListener('DOMContentLoaded', () => {
             { title: 'Lubricant Expo North America', url: 'https://lubricantexpo.com/na/', icon: 'assets/logo-na.png' },
             { title: 'Lubricant Expo Europe', url: 'https://lubricantexpo.com/eu/', icon: 'assets/logo-eu.png' },
             { title: 'Lubricant Expo Middle East', url: 'https://lubricantexpo.com/me/', icon: 'assets/logo-me.png' },
-            { title: 'Social: Lubricant Expo', url: 'https://www.linkedin.com/company/lubricant-expo' },
-            { title: 'Social: Middle East', url: 'https://www.linkedin.com/company/lubricant-expo-middle-east' },
-            { title: 'Social: North America', url: 'https://www.linkedin.com/company/lubricant-expo-north-america' }
+            { title: 'LinkedIn: Lubricant Expo', url: 'https://www.linkedin.com/company/lubricant-expo', icon: 'https://cdn-icons-png.flaticon.com/512/174/174857.png' },
+            { title: 'LinkedIn: Middle East', url: 'https://www.linkedin.com/company/lubricant-expo-middle-east', icon: 'https://cdn-icons-png.flaticon.com/512/174/174857.png' },
+            { title: 'LinkedIn: North America', url: 'https://www.linkedin.com/company/lubricant-expo-north-america', icon: 'https://cdn-icons-png.flaticon.com/512/174/174857.png' }
         ];
 
         linksList.innerHTML = '';
@@ -61,13 +58,10 @@ document.addEventListener('DOMContentLoaded', () => {
             a.target = '_blank';
             a.className = 'link-item glass';
 
-            // Container for logo to prevent shifts
             if (link.icon) {
                 const img = document.createElement('img');
                 img.src = link.icon;
-                img.alt = '';
                 img.className = 'link-logo';
-                // Only append if it doesn't fail immediately
                 img.onerror = () => img.remove();
                 a.appendChild(img);
             }
