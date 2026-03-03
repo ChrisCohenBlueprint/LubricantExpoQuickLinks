@@ -82,34 +82,46 @@ body {
 
 /* Minimal Branding Header */
 .hero-section {
-    margin-bottom: 4rem;
+    margin-bottom: 2.5rem;
+}
+
+.logo-wrapper {
+    width: 64px;
+    height: 64px;
+    padding: 10px;
+    margin-bottom: 1rem;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .hero-logo {
-    width: 100px;
+    width: 44px;
     height: auto;
-    margin-bottom: 1.5rem;
     filter: brightness(0) invert(1);
     opacity: 0.9;
 }
 
 .logo-text {
     font-family: 'Outfit', sans-serif;
-    font-size: 2.3rem;
+    font-size: 1.8rem;
     font-weight: 800;
-    letter-spacing: -0.5px;
-    line-height: 1;
+    color: #ffffff;
+    margin: 0;
+    line-height: 1.2;
 }
 
 .logo-text span {
-    color: var(--text-muted);
+    color: #ffffff;
+    opacity: 0.5;
     font-weight: 300;
 }
 
 .subtitle {
     color: var(--text-muted);
-    margin-top: 1rem;
-    font-size: 1.1rem;
+    margin-top: 0.5rem;
+    font-size: 0.95rem;
+    font-weight: 400;
     letter-spacing: 0.2px;
 }
 
