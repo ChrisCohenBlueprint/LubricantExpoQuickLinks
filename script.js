@@ -1,70 +1,83 @@
-:root {
-    --primary: #ffffff;
-    --primary-muted: rgba(255, 255, 255, 0.7);
-    --bg-dark: #0a0c10;
-    --glass-bg: rgba(255, 255, 255, 0.03);
-    --glass-border: rgba(255, 255, 255, 0.1);
-    --text-main: #ffffff;
-    --text-muted: rgba(255, 255, 255, 0.5);
-}
+document.addEventListener('DOMContentLoaded', () => {
+    const linksList = document.getElementById('links-list');
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+    // In a real scenario, this would be the actual API URL on Render
+    const API_BASE = '/api';
 
-body {
-    font-family: 'Inter', -apple-system, sans-serif;
-    background-color: var(--bg-dark);
-    color: var(--text-main);
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    padding: 10vh 0;
-}
+    async function fetchLinks() {
+        try {
+            const response = await fetch(`${API_BASE}/links`);
+            const links = await response.json();
 
-/* Subtle White Glow Background */
-.background-blobs {
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    z-index: -1; filter: blur(100px); opacity: 0.15;
-}
-.blob { position: absolute; border-radius: 50%; animation: blobFloat 25s infinite alternate ease-in-out; }
-.blob-1 { width: 40vw; height: 40vw; background: #ffffff; top: -10%; right: -10%; }
-.blob-2 { width: 30vw; height: 30vw; background: #ffffff; bottom: -5%; left: -5%; }
-@keyframes blobFloat {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    33% { transform: translate(20px, -30px) scale(1.05); }
-    66% { transform: translate(-15px, 20px) scale(0.95); }
-}
+            if (links.length === 0) {
+                linksList.innerHTML = '<p class="subtitle" style="text-align:center">No links found.</p>';
+                return;
+            }
 
-.app-container { width: 90%; max-width: 480px; text-align: center; }
+            renderLinks(links);
+        } catch (error) {
+            console.error('Error fetching links:', error);
+            // Fallback for demonstration if API isn't live yet
+            renderFallbackLinks();
+        }
+    }
 
-/* Clean Minimal Header */
-.hero-section { margin-bottom: 4rem; }
-.hero-logo { width: 100px; height: auto; margin-bottom: 1.5rem; filter: brightness(0) invert(1); opacity: 0.9; }
-.logo-text { font-family: 'Outfit', sans-serif; font-size: 2rem; font-weight: 800; letter-spacing: -0.5px; }
-.logo-text span { color: var(--text-muted); font-weight: 400; }
-.subtitle { color: var(--text-muted); margin-top: 0.8rem; font-size: 0.95rem; letter-spacing: 0.2px; }
+    function renderLinks(links) {
+        linksList.innerHTML = '';
+        links.forEach(link => {
+            const a = document.createElement('a');
+            a.href = `/l/${link._id}`;
+            a.className = 'link-item glass';
 
-/* Premium Glass Links */
-.links-container { display: flex; flex-direction: column; gap: 1rem; }
-.glass {
-    background: var(--glass-bg);
-    backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
-    border: 1px solid var(--glass-border);
-    border-radius: 12px;
-    padding: 1.2rem;
-    transition: all 0.2s ease;
-    text-decoration: none;
-    display: flex; align-items: center; justify-content: center;
-    min-height: 65px;
-}
-.glass:hover {
-    background: rgba(255, 255, 255, 0.07);
-    border-color: rgba(255, 255, 255, 0.3);
-    transform: translateY(-2px);
-}
+            if (link.icon) {
+                const img = document.createElement('img');
+                img.src = link.icon;
+                img.className = 'link-logo';
+                a.appendChild(img);
+            }
 
-.link-item span { color: white; font-weight: 500; font-size: 1.05rem; letter-spacing: 0.2px; }
+            const span = document.createElement('span');
+            span.textContent = link.title;
+            a.appendChild(span);
 
-/* Image handling */
-.link-logo { max-width: 90px; max-height: 25px; margin-right: 1.2rem; object-fit: contain; }
-img:not([src]), img[src=""] { display: none; }
+            linksList.appendChild(a);
+        });
+    }
+
+    function renderFallbackLinks() {
+        const fallback = [
+            { title: 'Lubricant Expo North America', url: 'https://lubricantexpo.com/na/', icon: 'assets/logo-na.png' },
+            { title: 'Lubricant Expo Europe', url: 'https://lubricantexpo.com/eu/', icon: 'assets/logo-eu.png' },
+            { title: 'Lubricant Expo Middle East', url: 'https://lubricantexpo.com/me/', icon: 'assets/logo-me.png' },
+            { title: 'Social: Lubricant Expo', url: 'https://www.linkedin.com/company/lubricant-expo' },
+            { title: 'Social: Middle East', url: 'https://www.linkedin.com/company/lubricant-expo-middle-east' },
+            { title: 'Social: North America', url: 'https://www.linkedin.com/company/lubricant-expo-north-america' }
+        ];
+
+        linksList.innerHTML = '';
+        fallback.forEach(link => {
+            const a = document.createElement('a');
+            a.href = link.url;
+            a.target = '_blank';
+            a.className = 'link-item glass';
+
+            // Container for logo to prevent shifts
+            if (link.icon) {
+                const img = document.createElement('img');
+                img.src = link.icon;
+                img.alt = '';
+                img.className = 'link-logo';
+                // Only append if it doesn't fail immediately
+                img.onerror = () => img.remove();
+                a.appendChild(img);
+            }
+
+            const span = document.createElement('span');
+            span.textContent = link.title;
+            a.appendChild(span);
+            linksList.appendChild(a);
+        });
+    }
+
+    fetchLinks();
+});
