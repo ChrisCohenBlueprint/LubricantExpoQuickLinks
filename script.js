@@ -46,9 +46,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function renderFallbackLinks() {
         const fallback = [
-            { title: 'Lubricant Expo North America', url: 'https://lubricantexpo.com/na/', icon: 'assets/logo-na.png' },
-            { title: 'Lubricant Expo Europe', url: 'https://lubricantexpo.com/eu/', icon: 'assets/logo-eu.png' },
-            { title: 'Lubricant Expo Middle East', url: 'https://lubricantexpo.com/me/', icon: 'assets/logo-me.png' },
+            { title: 'Lubricant Expo North America', url: 'https://lubricantexpo.com/na/', icon: 'public/assets/logo-na.png' },
+            { title: 'Lubricant Expo Europe', url: 'https://lubricantexpo.com/eu/', icon: 'public/assets/logo-eu.png' },
+            { title: 'Lubricant Expo Middle East', url: 'https://lubricantexpo.com/me/', icon: 'public/assets/logo-me.png' },
             { title: 'LinkedIn: Lubricant Expo', url: 'https://www.linkedin.com/company/lubricant-expo' },
             { title: 'LinkedIn: Lubricant Expo Middle East', url: 'https://www.linkedin.com/company/lubricant-expo-middle-east' },
             { title: 'LinkedIn: Lubricant Expo North America', url: 'https://www.linkedin.com/company/lubricant-expo-north-america' }
