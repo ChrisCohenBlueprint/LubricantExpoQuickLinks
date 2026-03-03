@@ -1,202 +1,269 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;800;900&display=swap');
+
 :root {
     --primary: #ffffff;
     --primary-muted: rgba(255, 255, 255, 0.7);
-    --bg-dark: #0a0c10;
-    --glass-bg: rgba(255, 255, 255, 0.04);
+    --bg-dark: #020408;
+    --glass-bg: rgba(255, 255, 255, 0.03);
     --glass-border: rgba(255, 255, 255, 0.12);
+    --glass-hover: rgba(255, 255, 255, 0.08);
     --text-main: #ffffff;
     --text-muted: rgba(255, 255, 255, 0.5);
+    --accent-glow: rgba(255, 255, 255, 0.2);
+    --card-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
+    --transition-speed: 0.4s;
 }
 
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-    font-family: 'Inter', -apple-system, sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", overflow-x: hidden;
     background-color: var(--bg-dark);
     color: var(--text-main);
     min-height: 100vh;
     display: flex;
-    justify-content: center;
-    padding: 8vh 0;
+    flex-direction: column;
+    align-items: center;
+    padding: 8vh 1.5rem;
 }
 
-/* Subtle White Glow Background */
+/* --- HIGH-FIDELITY NEURAL BACKGROUND --- */
 .background-blobs {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     z-index: -1;
-    filter: blur(100px);
-    opacity: 0.12;
+    filter: blur(120px);
+    opacity: 0.2;
+    pointer-events: none;
 }
 
 .blob {
     position: absolute;
     border-radius: 50%;
-    animation: blobFloat 25s infinite alternate ease-in-out;
+    animation: blobMovement 40s infinite linear alternate;
 }
 
 .blob-1 {
-    width: 45vw;
-    height: 45vw;
-    background: #ffffff;
-    top: -10%;
+    width: 60vw;
+    height: 60vw;
+    background: radial-gradient(circle, #ffffff 0%, transparent 70%);
+    top: -20%;
     right: -10%;
+    opacity: 0.6;
 }
 
 .blob-2 {
-    width: 35vw;
-    height: 35vw;
-    background: #ffffff;
-    bottom: -5%;
-    left: -5%;
+    width: 50vw;
+    height: 50vw;
+    background: radial-gradient(circle, #ffffff 0%, transparent 70%);
+    bottom: -10%;
+    left: -15%;
+    opacity: 0.4;
+    animation-direction: reverse;
+    animation-duration: 35s;
 }
 
-@keyframes blobFloat {
+.blob-3 {
+    width: 40vw;
+    height: 40vw;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+    top: 30%;
+    left: 10%;
+    animation-duration: 50s;
+}
 
-    0%,
-    100% {
-        transform: translate(0, 0) scale(1);
+@keyframes blobMovement {
+    0% {
+        transform: translate(0, 0) scale(1) rotate(0deg);
     }
 
     33% {
-        transform: translate(30px, -20px) scale(1.02);
+        transform: translate(5vw, -10vh) scale(1.1) rotate(120deg);
     }
 
     66% {
-        transform: translate(-20px, 30px) scale(0.98);
+        transform: translate(-8vw, 12vh) scale(0.9) rotate(240deg);
+    }
+
+    100% {
+        transform: translate(0, 0) scale(1) rotate(360deg);
     }
 }
 
+/* --- APP CONTAINER --- */
 .app-container {
-    width: 90%;
+    width: 100%;
     max-width: 480px;
-    text-align: center;
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-/* Minimal Branding Header */
+/* --- PREMIUM HEADER --- */
 .hero-section {
-    margin-bottom: 2.5rem;
+    width: 100%;
+    margin-bottom: 4.5rem;
+    animation: fadeInDown 1s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .logo-wrapper {
-    width: 64px;
-    height: 64px;
-    padding: 10px;
-    margin-bottom: 1rem;
-    border-radius: 16px;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    width: 72px;
+    height: 72px;
+    margin: 0 auto 1.5rem;
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), inset 0 0 10px rgba(255, 255, 255, 0.05);
 }
 
 .hero-logo {
-    width: 44px;
+    max-width: 40px;
     height: auto;
     filter: brightness(0) invert(1);
-    opacity: 0.9;
 }
 
 .logo-text {
     font-family: 'Outfit', sans-serif;
-    font-size: 1.8rem;
+    font-size: 2.2rem;
     font-weight: 800;
-    color: #ffffff;
-    margin: 0;
-    line-height: 1.2;
+    letter-spacing: -0.8px;
+    line-height: 1;
+    margin-bottom: 0.75rem;
 }
 
 .logo-text span {
-    color: #ffffff;
-    opacity: 0.5;
+    color: var(--text-muted);
     font-weight: 300;
 }
 
 .subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
     color: var(--text-muted);
-    margin-top: 0.5rem;
-    font-size: 0.95rem;
-    font-weight: 400;
-    letter-spacing: 0.2px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
 }
 
-/* Premium Glass Cards */
+/* --- VERTICAL LINK STACK --- */
 .links-container {
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 1.25rem;
 }
 
-.glass {
+.link-item {
+    position: relative;
+    width: 100%;
+    min-height: 80px;
     background: var(--glass-bg);
     backdrop-filter: blur(30px);
     -webkit-backdrop-filter: blur(30px);
     border: 1px solid var(--glass-border);
     border-radius: 24px;
-    padding: 1.4rem 1.8rem;
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    text-decoration: none;
+    padding: 1.25rem 2rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 80px;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
+    /* Center content horizontally */
+    text-decoration: none;
+    transition: all var(--transition-speed) cubic-bezier(0.165, 0.84, 0.44, 1);
+    box-shadow: var(--card-shadow);
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(30px);
 }
 
-.glass:hover {
-    background: rgba(255, 255, 255, 0.08);
+/* Reveal Animation Class */
+.link-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Hover Shine Effect */
+.link-item::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: 0.6s ease;
+}
+
+.link-item:hover {
+    background: var(--glass-hover);
     border-color: rgba(255, 255, 255, 0.35);
-    transform: translateY(-4px) scale(1.02);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+    transform: scale(1.025) translateY(-5px);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+}
+
+.link-item:hover::after {
+    left: 150%;
+}
+
+.link-item:active {
+    transform: scale(0.98) translateY(0);
+}
+
+.link-logo {
+    max-height: 32px;
+    max-width: 90px;
+    margin-right: 1.5rem;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+/* Specialized styling for square brand icons (LinkedIn) */
+.link-logo[src*="linkedin"],
+.link-logo[src*="flaticon"] {
+    max-height: 28px;
+    max-width: 28px;
+    filter: brightness(0) invert(1);
 }
 
 .link-item span {
-    color: white;
+    font-family: 'Inter', sans-serif;
     font-weight: 600;
     font-size: 1.15rem;
+    color: #ffffff;
     letter-spacing: 0.2px;
 }
 
-/* Icon Styles */
-.link-logo {
-    max-width: 80px;
-    max-height: 28px;
-    margin-right: 1.25rem;
-    object-fit: contain;
-}
-
-/* Ensure square icons like LinkedIn look balanced */
-.link-logo[src*="flaticon"],
-.link-logo[src*="linkedin"] {
-    max-width: 24px;
-    filter: brightness(0) invert(1);
-    /* Make it white to match theme */
-}
-
-img:not([src]),
-img[src=""],
-[src*="undefined"] {
-    display: none;
-}
-
-/* Spinner Fix */
+/* --- SPINNER & FOOTER --- */
 .loading-spinner {
-    padding: 3rem;
+    padding: 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
 }
 
 .spinner {
-    width: 35px;
-    height: 35px;
+    width: 48px;
+    height: 48px;
     border: 3px solid var(--glass-border);
-    border-top-color: white;
+    border-top: 3px solid #ffffff;
     border-radius: 50%;
-    animation: spin 1s linear infinite;
-    margin: 0 auto 1.5rem;
+    animation: spin 1s infinite cubic-bezier(0.5, 0, 0.5, 1);
 }
 
 @keyframes spin {
@@ -205,13 +272,43 @@ img[src=""],
     }
 }
 
-.loading-spinner p {
-    color: var(--text-muted);
-    font-size: 0.9rem;
+footer {
+    margin-top: 6rem;
+    padding-bottom: 3rem;
+    text-align: center;
+    opacity: 0.4;
 }
 
-footer {
-    margin-top: 4rem;
-    opacity: 0.4;
-    font-size: 0.8rem;
+footer p {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+/* Entrance Animations */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding-top: 5vh;
+    }
+
+    .hero-section {
+        margin-bottom: 3.5rem;
+    }
+
+    .logo-text {
+        font-size: 1.8rem;
+    }
 }
