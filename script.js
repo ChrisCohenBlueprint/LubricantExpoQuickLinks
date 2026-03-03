@@ -3,9 +3,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const API_BASE = '/api';
 
     async function fetchLinks() {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 3500); // 3.5s timeout
+
         try {
-            const response = await fetch(`${API_BASE}/links`);
-            if (!response.ok) throw new Error('Network response was not ok');
+            const response = await fetch(`${API_BASE}/links`, { signal: controller.signal });
+            clearTimeout(timeoutId);
             const links = await response.json();
 
             if (!links || links.length === 0) {
@@ -14,7 +17,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 renderLinks(links);
             }
         } catch (error) {
-            console.warn('API unavailable, showing fallback links.');
+            clearTimeout(timeoutId);
+            console.warn('API slow or unavailable, showing fallback links.');
             renderFallbackLinks();
         }
     }
