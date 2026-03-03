@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 require('dotenv').config();
-const Link = require('./link');
+const Link = require('./models/Link'); // Fixed path to models/Link
 
 const links = [
     {
@@ -22,31 +22,37 @@ const links = [
         order: 3
     },
     {
-        title: 'LinkedIn: Lubricant Expo',
-        url: 'https://www.linkedin.com/company/lubricant-expo',
+        title: 'LinkedIn: North America',
+        url: 'https://www.linkedin.com/company/lubricant-expo-north-america',
+        icon: 'https://cdn-icons-png.flaticon.com/512/174/174857.png',
         order: 4
     },
     {
-        title: 'LinkedIn: Lubricant Expo Middle East',
+        title: 'LinkedIn: Middle East',
         url: 'https://www.linkedin.com/company/lubricant-expo-middle-east',
+        icon: 'https://cdn-icons-png.flaticon.com/512/174/174857.png',
         order: 5
     },
     {
-        title: 'LinkedIn: Lubricant Expo North America',
-        url: 'https://www.linkedin.com/company/lubricant-expo-north-america',
+        title: 'LinkedIn: Europe',
+        url: 'https://www.linkedin.com/company/lubricant-expo-europe',
+        icon: 'https://cdn-icons-png.flaticon.com/512/174/174857.png',
         order: 6
     }
 ];
 
 async function seed() {
     try {
+        if (!process.env.MONGODB_URI) {
+            throw new Error('MONGODB_URI is missing in .env');
+        }
         await mongoose.connect(process.env.MONGODB_URI);
         console.log('Connected to MongoDB');
 
-        await Link.deleteMany({}); // Clear existing links if any
+        await Link.deleteMany({}); // THIS WIPES THE OLD "GLOBAL" LINK
         await Link.insertMany(links);
 
-        console.log('Database seeded successfully!');
+        console.log('Database seeded successfully! Your live site is now clean.');
         process.exit();
     } catch (err) {
         console.error('Seed error:', err);
