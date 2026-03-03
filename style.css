@@ -2,12 +2,10 @@
     --primary: #ffffff;
     --primary-muted: rgba(255, 255, 255, 0.7);
     --bg-dark: #0a0c10;
-    --glass-bg: rgba(255, 255, 255, 0.03);
-    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-bg: rgba(255, 255, 255, 0.04);
+    --glass-border: rgba(255, 255, 255, 0.12);
     --text-main: #ffffff;
     --text-muted: rgba(255, 255, 255, 0.5);
-    --accent-gradient: linear-gradient(135deg, #ffffff 0%, #a1a1a1 100%);
-    --card-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
 }
 
 * {
@@ -21,15 +19,12 @@ body {
     background-color: var(--bg-dark);
     color: var(--text-main);
     min-height: 100vh;
-    overflow-x: hidden;
     display: flex;
     justify-content: center;
-    align-items: flex-start;
-    /* Better for mobile-friendly vertical listing */
-    padding: 10vh 0;
+    padding: 8vh 0;
 }
 
-/* Background Decorations (Shared with LNA) */
+/* Subtle White Glow Background */
 .background-blobs {
     position: fixed;
     top: 0;
@@ -38,7 +33,29 @@ body {
     height: 100%;
     z-index: -1;
     filter: blur(100px);
-    opacity: 0.2;
+    opacity: 0.12;
+}
+
+.blob {
+    position: absolute;
+    border-radius: 50%;
+    animation: blobFloat 25s infinite alternate ease-in-out;
+}
+
+.blob-1 {
+    width: 45vw;
+    height: 45vw;
+    background: #ffffff;
+    top: -10%;
+    right: -10%;
+}
+
+.blob-2 {
+    width: 35vw;
+    height: 35vw;
+    background: #ffffff;
+    bottom: -5%;
+    left: -5%;
 }
 
 @keyframes blobFloat {
@@ -49,63 +66,23 @@ body {
     }
 
     33% {
-        transform: translate(20px, -30px) scale(1.05);
+        transform: translate(30px, -20px) scale(1.02);
     }
 
     66% {
-        transform: translate(-15px, 20px) scale(0.95);
+        transform: translate(-20px, 30px) scale(0.98);
     }
-}
-
-.blob {
-    position: absolute;
-    border-radius: 50%;
-    animation: blobFloat 25s infinite alternate ease-in-out;
-}
-
-.blob-1 {
-    width: 40vw;
-    height: 40vw;
-    background: #ffffff;
-    top: -10%;
-    right: -10%;
-}
-
-.blob-2 {
-    width: 30vw;
-    height: 30vw;
-    background: #3498db;
-    bottom: -5%;
-    left: -5%;
 }
 
 .app-container {
     width: 90%;
     max-width: 480px;
-    /* Traditional Linktree width */
-    padding: 1rem;
-    position: relative;
-    z-index: 1;
     text-align: center;
 }
 
+/* Minimal Branding Header */
 .hero-section {
-    text-align: center;
     margin-bottom: 4rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.logo-wrapper {
-    width: 100px;
-    height: 100px;
-    padding: 15px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 1.5rem;
 }
 
 .hero-logo {
@@ -113,138 +90,108 @@ body {
     height: auto;
     margin-bottom: 1.5rem;
     filter: brightness(0) invert(1);
+    opacity: 0.9;
 }
 
 .logo-text {
     font-family: 'Outfit', sans-serif;
-    font-size: 2rem;
+    font-size: 2.3rem;
     font-weight: 800;
-    letter-spacing: -1px;
-    line-height: 1.1;
+    letter-spacing: -0.5px;
+    line-height: 1;
 }
 
 .logo-text span {
     color: var(--text-muted);
-    font-weight: 400;
+    font-weight: 300;
 }
 
 .subtitle {
     color: var(--text-muted);
     margin-top: 1rem;
-    font-size: 1rem;
+    font-size: 1.1rem;
+    letter-spacing: 0.2px;
 }
 
-/* Links Container */
+/* Premium Glass Cards */
 .links-container {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 1.25rem;
 }
 
 .glass {
     background: var(--glass-bg);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
     border: 1px solid var(--glass-border);
-    border-radius: 12px;
-    padding: 1rem 1.5rem;
-    transition: all 0.2s ease;
+    border-radius: 24px;
+    padding: 1.4rem 1.8rem;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     text-decoration: none;
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 60px;
-    box-shadow: var(--card-shadow);
+    min-height: 80px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
 }
 
 .glass:hover {
     background: rgba(255, 255, 255, 0.08);
-    border-color: rgba(255, 255, 255, 0.3);
-    transform: scale(1.01);
-}
-
-.link-item {
-    /* This rule is largely replaced by .glass, but keeping for potential specific overrides */
-    text-decoration: none;
-    color: var(--text-main);
-    text-align: left;
-    /* Re-added for consistency if needed */
+    border-color: rgba(255, 255, 255, 0.35);
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
 }
 
 .link-item span {
     color: white;
-    font-weight: 500;
-    font-size: 1rem;
-    letter-spacing: 0.3px;
+    font-weight: 600;
+    font-size: 1.15rem;
+    letter-spacing: 0.2px;
 }
 
+/* Icon Styles */
 .link-logo {
-    height: auto;
+    max-width: 100px;
+    max-height: 30px;
+    margin-right: 1.5rem;
     object-fit: contain;
-    filter: brightness(1.2);
-    /* Make them pop on dark background */
 }
 
-.link-item span {
-    flex: 1;
+img:not([src]),
+img[src=""],
+[src*="undefined"] {
+    display: none;
 }
 
-.link-item:hover {
-    transform: scale(1.02) translateY(-4px);
-    background: rgba(255, 255, 255, 0.08);
-    border-color: var(--primary);
-}
-
-.link-item:active {
-    transform: scale(0.98);
-}
-
-/* Legal Footer */
-.legal-footer {
-    margin-top: 3rem;
-    text-align: center;
-    padding-bottom: 2rem;
-}
-
-.legal-footer p {
-    font-size: 0.8rem;
-    color: var(--text-muted);
-}
-
-/* Loading State */
+/* Spinner Fix */
 .loading-spinner {
-    text-align: center;
-    padding: 2rem;
-    color: var(--text-muted);
+    padding: 3rem;
 }
 
 .spinner {
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
     border: 3px solid var(--glass-border);
-    border-top: 3px solid var(--primary);
+    border-top-color: white;
     border-radius: 50%;
     animation: spin 1s linear infinite;
-    margin: 0 auto 1rem;
+    margin: 0 auto 1.5rem;
 }
 
 @keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
-
-    100% {
+    to {
         transform: rotate(360deg);
     }
 }
 
-/* Mobile Specific Tweaks */
-@media (max-width: 480px) {
-    .app-container {
-        width: 95%;
-    }
+.loading-spinner p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
 
-    .logo-text {
-        font-size: 1.75rem;
-    }
+footer {
+    margin-top: 4rem;
+    opacity: 0.4;
+    font-size: 0.8rem;
 }
