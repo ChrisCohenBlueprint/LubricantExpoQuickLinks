@@ -3,13 +3,13 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv').config();
 
-const Link = require('./models/Link');
-const Analytics = require('./models/Analytics');
+const Link = require('./link'); // Changed from ./models/Link
+const Analytics = require('./analytics'); // Changed from ./models/Analytics
 
 const app = express();
 app.use(cors());
 app.use(express.json());
-app.use(express.static('public'));
+app.use(express.static('./')); // Changed from 'public'
 
 // MongoDB Connection
 mongoose.connect(process.env.MONGODB_URI)
