@@ -48,7 +48,7 @@ app.get('/l/:id', async (req, res) => {
 });
 
 // 3. Newsletter Subscription
-const Subscriber = require('./models/Subscriber');
+const Subscriber = require('./subscriber');
 app.post('/api/subscribe', async (req, res) => {
     try {
         const { email } = req.body;
