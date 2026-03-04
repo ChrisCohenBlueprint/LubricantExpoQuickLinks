@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
             { title: 'Lubricant Expo Middle East', url: 'https://lubricantexpo.com/me/', icon: 'logo-me.png' },
             { title: 'LinkedIn: Lubricant Expo North America', url: 'https://www.linkedin.com/company/lubricant-expo-north-america', icon: 'https://cdn-icons-png.flaticon.com/512/174/174857.png' },
             { title: 'LinkedIn: Lubricant Expo Middle East', url: 'https://www.linkedin.com/company/lubricant-expo-middle-east', icon: 'https://cdn-icons-png.flaticon.com/512/174/174857.png' },
-            { title: 'LinkedIn: Lubricant Expo Europe', url: 'https://www.linkedin.com/company/lubricant-expo-europe', icon: 'https://cdn-icons-png.flaticon.com/512/174/174857.png' }
+            { title: 'LinkedIn: Lubricant Expo Europe', url: 'https://www.linkedin.com/company/lubricant-expo/', icon: 'https://cdn-icons-png.flaticon.com/512/174/174857.png' }
         ];
 
         linksList.innerHTML = '';
