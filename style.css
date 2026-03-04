@@ -21,7 +21,7 @@
 }
 
 body {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Neue Haas Grotesk Display Pro', 'Inter', -apple-system, sans-serif;
     background-color: var(--bg-dark);
     color: var(--text-main);
     min-height: 100vh;
@@ -141,7 +141,7 @@ body {
 }
 
 .logo-text {
-    font-family: 'Outfit', sans-serif;
+    font-family: 'Neue Haas Grotesk Display Pro', 'Inter', sans-serif;
     font-size: 2.2rem;
     font-weight: 800;
     letter-spacing: -0.8px;
@@ -151,16 +151,18 @@ body {
 
 .logo-text span {
     color: rgba(255, 255, 255, 0.4);
-    font-weight: 300;
+    font-weight: 400;
+    /* Slightly heavier than 300 for the premium font */
 }
 
 .subtitle {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.9rem;
-    font-weight: 400;
+    font-family: 'Neue Haas Grotesk Display Pro', 'Inter', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    /* BOLD as requested */
     color: var(--text-muted);
     letter-spacing: 0.5px;
-    opacity: 0.8;
+    opacity: 0.9;
 }
 
 /* --- VERTICAL LINK STACK --- */
@@ -237,7 +239,8 @@ body {
 }
 
 .link-item span {
-    font-weight: 600;
+    font-weight: 700;
+    /* BOLD as requested */
     font-size: 1.15rem;
     color: #ffffff;
     letter-spacing: 0.2px;
@@ -252,9 +255,9 @@ body {
 }
 
 .legal-footer p {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Neue Haas Grotesk Display Pro', 'Inter', sans-serif;
     font-size: 0.85rem;
-    font-weight: 400;
+    font-weight: 500;
     color: var(--text-muted);
 }
 
