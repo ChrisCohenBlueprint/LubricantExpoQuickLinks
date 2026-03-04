@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 require('dotenv').config();
-const Link = require('./models/Link'); // Fixed path to models/Link
+const Link = require('./link');
 
 const links = [
     {
