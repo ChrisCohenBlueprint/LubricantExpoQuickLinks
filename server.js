@@ -47,6 +47,29 @@ app.get('/l/:id', async (req, res) => {
     }
 });
 
+// 3. Newsletter Subscription
+const Subscriber = require('./models/Subscriber');
+app.post('/api/subscribe', async (req, res) => {
+    try {
+        const { email } = req.body;
+        if (!email) return res.status(400).json({ error: 'Email is required' });
+
+        // Check if already subscribed
+        const existing = await Subscriber.findOne({ email });
+        if (existing) {
+            return res.status(400).json({ error: 'Already subscribed!' });
+        }
+
+        const newSubscriber = new Subscriber({ email });
+        await newSubscriber.save();
+
+        res.status(201).json({ message: 'Subscribed successfully!' });
+    } catch (err) {
+        console.error('Subscription error:', err);
+        res.status(500).json({ error: 'Failed to subscribe. Please try again.' });
+    }
+});
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
