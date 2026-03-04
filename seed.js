@@ -35,7 +35,7 @@ const links = [
     },
     {
         title: 'LinkedIn: Europe',
-        url: 'https://www.linkedin.com/company/lubricant-expo-europe',
+        url: 'https://www.linkedin.com/company/lubricant-expo/',
         icon: 'https://cdn-icons-png.flaticon.com/512/174/174857.png',
         order: 6
     }
