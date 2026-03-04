@@ -97,5 +97,44 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // --- NEWSLETTER HANDLING ---
+    const newsletterForm = document.getElementById('newsletter-form');
+    const emailInput = document.getElementById('subscriber-email');
+    const formMessage = document.getElementById('form-message');
+
+    if (newsletterForm) {
+        newsletterForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = emailInput.value.trim();
+            if (!email) return;
+
+            // Reset message
+            formMessage.textContent = 'Subscribing...';
+            formMessage.className = 'form-message';
+
+            try {
+                const response = await fetch(`${API_BASE}/subscribe`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    formMessage.textContent = 'Successfully subscribed!';
+                    formMessage.classList.add('success');
+                    emailInput.value = ''; // Clear input
+                } else {
+                    formMessage.textContent = data.error || 'Subscription failed.';
+                    formMessage.classList.add('error');
+                }
+            } catch (err) {
+                formMessage.textContent = 'Connection error. Please try again.';
+                formMessage.classList.add('error');
+            }
+        });
+    }
+
     fetchLinks();
 });
