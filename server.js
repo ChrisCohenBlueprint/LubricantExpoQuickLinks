@@ -13,12 +13,23 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Serve static files from the 'public' folder using absolute path
+// Step 1: Tell Express where all your website files (html, css, js) are:
+// We check BOTH the root and the 'public' folder just in case
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(__dirname));
 
-// Explicit route to serve index.html for the root
+// Step 2: Explicitly send index.html when someone visits the main site URL
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    // Try public first, then root
+    res.sendFile(path.join(__dirname, 'public', 'index.html'), (err) => {
+        if (err) {
+            res.sendFile(path.join(__dirname, 'index.html'), (err2) => {
+                if (err2) {
+                    res.status(404).send('index.html not found in root or public folder');
+                }
+            });
+        }
+    });
 });
 
 const MONGODB_URI = process.env.MONGODB_URI;
