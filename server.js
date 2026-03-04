@@ -8,12 +8,18 @@ const Link = require('./link');
 const Analytics = require('./analytics');
 const Subscriber = require('./subscriber');
 
+const path = require('path');
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Serve static files from the 'public' folder
-app.use(express.static('public'));
+// Serve static files from the 'public' folder using absolute path
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Explicit route to serve index.html for the root
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
 
 // MongoDB Connection
 const MONGODB_URI = process.env.MONGODB_URI;
