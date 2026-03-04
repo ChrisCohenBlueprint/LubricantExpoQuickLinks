@@ -3,20 +3,34 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv').config();
 
-const Link = require('./link'); // Changed from ./models/Link
-const Analytics = require('./analytics'); // Changed from ./models/Analytics
+// Models - Using Flat Structure (Files in Root)
+const Link = require('./link');
+const Analytics = require('./analytics');
+const Subscriber = require('./subscriber');
 
 const app = express();
 app.use(cors());
 app.use(express.json());
-app.use(express.static('./')); // Changed from 'public'
+
+// Serve static files from the 'public' folder
+app.use(express.static('public'));
 
 // MongoDB Connection
-mongoose.connect(process.env.MONGODB_URI)
-    .then(() => console.log('Connected to MongoDB'))
-    .catch(err => console.error('MongoDB connection error:', err));
+const MONGODB_URI = process.env.MONGODB_URI;
 
-// Routes
+if (!MONGODB_URI) {
+    console.error('CRITICAL ERROR: MONGODB_URI is not defined in environment variables.');
+    process.exit(1);
+}
+
+mongoose.connect(MONGODB_URI)
+    .then(() => console.log('Connected to MongoDB Successfully'))
+    .catch(err => {
+        console.error('MongoDB connection error:', err);
+        process.exit(1);
+    });
+
+// API Routes
 // 1. Fetch all links
 app.get('/api/links', async (req, res) => {
     try {
@@ -48,7 +62,6 @@ app.get('/l/:id', async (req, res) => {
 });
 
 // 3. Newsletter Subscription
-const Subscriber = require('./subscriber');
 app.post('/api/subscribe', async (req, res) => {
     try {
         const { email } = req.body;
@@ -66,7 +79,7 @@ app.post('/api/subscribe', async (req, res) => {
         res.status(201).json({ message: 'Subscribed successfully!' });
     } catch (err) {
         console.error('Subscription error:', err);
-        res.status(500).json({ error: 'Failed to subscribe. Please try again.' });
+        res.status(500).json({ error: 'Failed to subscribe.' });
     }
 });
 
