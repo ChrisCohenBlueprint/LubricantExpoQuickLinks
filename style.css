@@ -186,7 +186,7 @@ body {
     -webkit-backdrop-filter: blur(30px);
     border: 1px solid var(--glass-border);
     border-radius: 22px;
-    padding: 1rem 3.5rem;
+    padding: 1rem 4.5rem;
     /* More horizontal padding for the absolute icon */
     text-decoration: none;
     transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
@@ -225,16 +225,21 @@ body {
 }
 
 .link-logo {
-    max-height: 30px;
-    max-width: 90px;
-    margin-right: 1.5rem;
+    position: absolute;
+    left: 2.5rem;
+    /* THE AXIS POINT */
+    top: 50%;
+    transform: translate(-50%, -50%);
+    /* VERTICAL & HORIZONTAL CENTER ON AXIS */
+    max-width: 45px;
+    max-height: 26px;
     object-fit: contain;
 }
 
 .link-logo[src*="linkedin"],
 .link-logo[src*="flaticon"] {
-    max-height: 24px;
-    max-width: 24px;
+    max-width: 26px;
+    max-height: 26px;
     filter: brightness(0) invert(1);
 }
 
